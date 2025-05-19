@@ -114,6 +114,10 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 		return previousRouteDestination;
 	}
 
+	public boolean getPreviousIsOnRequest() {
+		return previousIsOnRequest;
+	}
+	
 	public long getThisRouteId() {
 		return thisRouteId;
 	}
@@ -154,6 +158,10 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 		return thisRouteDestination;
 	}
 
+	public boolean getThisIsOnRequest() {
+		return thisIsOnRequest;
+	}
+
 	public long getNextRouteId() {
 		return nextRouteId;
 	}
@@ -192,6 +200,10 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 
 	public String getNextRouteDestination() {
 		return nextRouteDestination;
+	}
+
+	public boolean getNextIsOnRequest() {
+		return nextIsOnRequest;
 	}
 
 	public int getStopIndex() {
@@ -325,6 +337,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			previousRouteCircularState = Route.CircularState.NONE;
 			previousStationName = "";
 			previousRouteDestination = "";
+			previousIsOnRequest = false;
 
 			thisRouteId = 0;
 			thisPlatformId = 0;
@@ -336,6 +349,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			thisRouteCircularState = Route.CircularState.NONE;
 			thisStationName = "";
 			thisRouteDestination = "";
+			thisIsOnRequest = false;
 
 			nextRouteId = 0;
 			nextPlatformId = 0;
@@ -347,6 +361,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			nextRouteCircularState = Route.CircularState.NONE;
 			nextStationName = "";
 			nextRouteDestination = "";
+			nextIsOnRequest = false;
 		} else {
 			final int newStopIndex = immutablePath.get(currentIndex).getStopIndex();
 			if (newStopIndex == stopIndex) {
@@ -367,6 +382,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			previousRouteCircularState = getRouteCircularState(vehiclePlatformRouteInfo.previousRoute);
 			previousStationName = getStationName(vehiclePlatformRouteInfo.previousPlatform);
 			previousRouteDestination = getRouteDestination(vehiclePlatformRouteInfo.previousRoute, 0);
+			previousIsOnRequest = vehiclePlatformRouteInfo.previousIsOnRequest;
 
 			thisRouteId = getId(vehiclePlatformRouteInfo.thisRoute);
 			thisPlatformId = getId(vehiclePlatformRouteInfo.thisPlatform);
@@ -378,6 +394,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			thisRouteCircularState = getRouteCircularState(vehiclePlatformRouteInfo.thisRoute);
 			thisStationName = getStationName(vehiclePlatformRouteInfo.thisPlatform);
 			thisRouteDestination = getRouteDestination(vehiclePlatformRouteInfo.thisRoute, vehiclePlatformRouteInfo.platformIndexInRoute);
+			thisIsOnRequest = vehiclePlatformRouteInfo.thisIsOnRequest;
 
 			nextRouteId = getId(vehiclePlatformRouteInfo.nextRoute);
 			nextPlatformId = getId(vehiclePlatformRouteInfo.nextPlatform);
@@ -389,6 +406,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			nextRouteCircularState = getRouteCircularState(vehiclePlatformRouteInfo.nextRoute);
 			nextStationName = getStationName(vehiclePlatformRouteInfo.nextPlatform);
 			nextRouteDestination = getRouteDestination(vehiclePlatformRouteInfo.nextRoute, 0);
+			nextIsOnRequest = vehiclePlatformRouteInfo.nextIsOnRequest;
 
 			isTerminating = vehiclePlatformRouteInfo.thisRoute != null && vehiclePlatformRouteInfo.platformIndexInRoute >= vehiclePlatformRouteInfo.thisRoute.getRoutePlatforms().size() - 1;
 
@@ -506,8 +524,11 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 		private final Route thisRoute;
 		private final Route nextRoute;
 		private final int platformIndexInRoute;
+		private final boolean previousIsOnRequest;
+		private final boolean thisIsOnRequest;
+		private final boolean nextIsOnRequest;
 
-		public VehiclePlatformRouteInfo(@Nullable Platform previousPlatform, @Nullable Platform thisPlatform, @Nullable Platform nextPlatform, @Nullable Route previousRoute, @Nullable Route thisRoute, @Nullable Route nextRoute, int platformIndexInRoute) {
+		public VehiclePlatformRouteInfo(@Nullable Platform previousPlatform, @Nullable Platform thisPlatform, @Nullable Platform nextPlatform, @Nullable Route previousRoute, @Nullable Route thisRoute, @Nullable Route nextRoute, int platformIndexInRoute, boolean previousIsOnRequest, boolean thisIsOnRequest, boolean nextIsOnRequest) {
 			this.previousPlatform = previousPlatform;
 			this.thisPlatform = thisPlatform;
 			this.nextPlatform = nextPlatform;
@@ -515,6 +536,9 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			this.thisRoute = thisRoute;
 			this.nextRoute = nextRoute;
 			this.platformIndexInRoute = platformIndexInRoute;
+			this.previousIsOnRequest = previousIsOnRequest;
+			this.thisIsOnRequest = thisIsOnRequest;
+			this.nextIsOnRequest = nextIsOnRequest;
 		}
 	}
 }

@@ -41,6 +41,9 @@
 		"previousRouteDestination": {
 			"type": "string"
 		},
+		"previousIsOnRequest": {
+			"type": "boolean"
+		},
 		"thisRouteId": {
 			"type": "integer"
 		},
@@ -71,6 +74,9 @@
 		"thisRouteDestination": {
 			"type": "string"
 		},
+		"thisIsOnRequest": {
+			"type": "boolean"
+		},
 		"nextRouteId": {
 			"type": "integer"
 		},
@@ -100,6 +106,9 @@
 		},
 		"nextRouteDestination": {
 			"type": "string"
+		},
+		"nextIsOnRequest": {
+			"type": "boolean"
 		},
 		"isTerminating": {
 			"type": "boolean"
