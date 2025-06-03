@@ -1,9 +1,9 @@
 package org.mtr.core.operation;
 
-import it.unimi.dsi.fastutil.longs.LongArrayList;
 import org.mtr.core.data.Rail;
 import org.mtr.core.generated.operation.SignalBlockUpdateSchema;
 import org.mtr.core.serializer.ReaderBase;
+import org.mtr.libraries.it.unimi.dsi.fastutil.longs.LongArrayList;
 
 public final class SignalBlockUpdate extends SignalBlockUpdateSchema {
 

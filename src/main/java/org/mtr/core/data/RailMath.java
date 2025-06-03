@@ -1,9 +1,9 @@
 package org.mtr.core.data;
 
-import it.unimi.dsi.fastutil.doubles.DoubleDoubleImmutablePair;
 import org.mtr.core.tool.Angle;
 import org.mtr.core.tool.Utilities;
 import org.mtr.core.tool.Vector;
+import org.mtr.libraries.it.unimi.dsi.fastutil.doubles.DoubleDoubleImmutablePair;
 
 public class RailMath {
 

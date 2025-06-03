@@ -1,9 +1,9 @@
 package org.mtr.core.map;
 
-import it.unimi.dsi.fastutil.longs.Long2ObjectAVLTreeMap;
-import it.unimi.dsi.fastutil.longs.LongArrayList;
 import org.mtr.core.generated.map.DeparturesByRouteSchema;
 import org.mtr.core.serializer.ReaderBase;
+import org.mtr.libraries.it.unimi.dsi.fastutil.longs.Long2ObjectAVLTreeMap;
+import org.mtr.libraries.it.unimi.dsi.fastutil.longs.LongArrayList;
 
 public final class DeparturesByRoute extends DeparturesByRouteSchema {
 
