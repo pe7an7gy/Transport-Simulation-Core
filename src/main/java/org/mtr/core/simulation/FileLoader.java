@@ -10,6 +10,7 @@ import org.mtr.libraries.org.msgpack.core.MessageBufferPacker;
 import org.mtr.libraries.org.msgpack.core.MessagePack;
 import org.mtr.libraries.org.msgpack.core.MessagePacker;
 import org.mtr.libraries.org.msgpack.core.MessageUnpacker;
+import org.mtr.libraries.org.msgpack.core.*;
 
 import javax.annotation.Nullable;
 import java.io.InputStream;
@@ -163,6 +164,10 @@ public class FileLoader<T extends SerializedDataBaseWithId> {
 				return getData.apply(new MessagePackReader(messageUnpacker));
 			} catch (Exception e) {
 				Main.LOGGER.error("", e);
+				if (e instanceof MessageTypeException) {
+					Main.LOGGER.info("Deleting file with parsing error [{}]", idFile);
+					Files.deleteIfExists(idFile);
+				}
 			}
 		} catch (Exception e) {
 			Main.LOGGER.error("", e);
