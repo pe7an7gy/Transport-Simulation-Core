@@ -36,6 +36,14 @@ public final class Platform extends PlatformSchema {
 	public long getDwellTime() {
 		return transportMode.continuousMovement ? 1 : Math.max(1, dwellTime);
 	}
+	
+	public void setIsOnRequest(boolean isOnRequest) {
+		this.isOnRequest = isOnRequest;
+	}
+
+	public boolean getIsOnRequest() {
+		return isOnRequest;
+	}
 
 	public void setAngles(long depotId, Angle angle) {
 		anglesFromDepot.put(depotId, angle);

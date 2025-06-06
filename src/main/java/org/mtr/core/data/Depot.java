@@ -177,7 +177,7 @@ public final class Depot extends DepotSchema implements Utilities {
 				if (platform != null && platform.getId() != previousPlatformId) {
 					// To deal with edge cases (whether the next route starts from the same platform or not), we will always use the "next" data
 					// If i == 0, it's the first index of this route, but since we are looking for the "next" data, it's okay to set it as null as the "next" data of the previous route
-					platformsInRoute.add(new PlatformRouteDetails(platform, i == 0 ? null : route, i == 0 ? Integer.MAX_VALUE : i - 1, true));
+					platformsInRoute.add(new PlatformRouteDetails(platform, i == 0 ? null : route, i == 0 ? Integer.MAX_VALUE : i - 1));
 					previousPlatformId = platform.getId();
 				}
 			}
@@ -236,10 +236,7 @@ public final class Depot extends DepotSchema implements Utilities {
 				thisData == null ? null : thisData.route,
 				nextData == null ? null : nextData.route,
 				nextNextData == null ? null : nextNextData.route,
-				nextData == null ? Integer.MAX_VALUE : nextData.platformIndex,
-				previousData == null ? false : previousData.isOnRequest,
-				thisData == null ? false : thisData.isOnRequest,
-				nextData == null ? false : nextData.isOnRequest
+				nextData == null ? Integer.MAX_VALUE : nextData.platformIndex
 		);
 	}
 
@@ -415,13 +412,11 @@ public final class Depot extends DepotSchema implements Utilities {
 		@Nullable
 		private final Route route;
 		private final int platformIndex;
-		private final boolean isOnRequest;
 
-		private PlatformRouteDetails(Platform platform, @Nullable Route route, int platformIndex, boolean isOnRequest) {
+		private PlatformRouteDetails(Platform platform, @Nullable Route route, int platformIndex) {
 			this.platform = platform;
 			this.route = route;
 			this.platformIndex = platformIndex;
-			this.isOnRequest = isOnRequest;
 		}
 	}
 

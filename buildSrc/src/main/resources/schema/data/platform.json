@@ -9,6 +9,10 @@
 		"dwellTime": {
 			"type": "integer",
 			"default": 10000
+		},
+		"isOnRequest": {
+			"type": "boolean",
+			"default": true
 		}
 	}
 }

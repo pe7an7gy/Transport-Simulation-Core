@@ -382,7 +382,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			previousRouteCircularState = getRouteCircularState(vehiclePlatformRouteInfo.previousRoute);
 			previousStationName = getStationName(vehiclePlatformRouteInfo.previousPlatform);
 			previousRouteDestination = getRouteDestination(vehiclePlatformRouteInfo.previousRoute, 0);
-			previousIsOnRequest = vehiclePlatformRouteInfo.previousIsOnRequest;
+			previousIsOnRequest = getIsOnRequest(vehiclePlatformRouteInfo.previousPlatform);
 
 			thisRouteId = getId(vehiclePlatformRouteInfo.thisRoute);
 			thisPlatformId = getId(vehiclePlatformRouteInfo.thisPlatform);
@@ -394,7 +394,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			thisRouteCircularState = getRouteCircularState(vehiclePlatformRouteInfo.thisRoute);
 			thisStationName = getStationName(vehiclePlatformRouteInfo.thisPlatform);
 			thisRouteDestination = getRouteDestination(vehiclePlatformRouteInfo.thisRoute, vehiclePlatformRouteInfo.platformIndexInRoute);
-			thisIsOnRequest = vehiclePlatformRouteInfo.thisIsOnRequest;
+			thisIsOnRequest = getIsOnRequest(vehiclePlatformRouteInfo.thisPlatform);
 
 			nextRouteId = getId(vehiclePlatformRouteInfo.nextRoute);
 			nextPlatformId = getId(vehiclePlatformRouteInfo.nextPlatform);
@@ -406,7 +406,7 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			nextRouteCircularState = getRouteCircularState(vehiclePlatformRouteInfo.nextRoute);
 			nextStationName = getStationName(vehiclePlatformRouteInfo.nextPlatform);
 			nextRouteDestination = getRouteDestination(vehiclePlatformRouteInfo.nextRoute, 0);
-			nextIsOnRequest = vehiclePlatformRouteInfo.nextIsOnRequest;
+			nextIsOnRequest = getIsOnRequest(vehiclePlatformRouteInfo.nextPlatform);
 
 			isTerminating = vehiclePlatformRouteInfo.thisRoute != null && vehiclePlatformRouteInfo.platformIndexInRoute >= vehiclePlatformRouteInfo.thisRoute.getRoutePlatforms().size() - 1;
 
@@ -527,6 +527,10 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 	private static String getRouteDestination(@Nullable Route route, int stopIndex) {
 		return route == null ? "" : route.getDestination(stopIndex);
 	}
+	
+	private static boolean getIsOnRequest(@Nullable Platform platform) {
+		return platform == null ? false : platform.getIsOnRequest();
+	}
 
 	public static class VehiclePlatformRouteInfo {
 
@@ -537,11 +541,8 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 		private final Route thisRoute;
 		private final Route nextRoute;
 		private final int platformIndexInRoute;
-		private final boolean previousIsOnRequest;
-		private final boolean thisIsOnRequest;
-		private final boolean nextIsOnRequest;
 
-		public VehiclePlatformRouteInfo(@Nullable Platform previousPlatform, @Nullable Platform thisPlatform, @Nullable Platform nextPlatform, @Nullable Route previousRoute, @Nullable Route thisRoute, @Nullable Route nextRoute, int platformIndexInRoute, boolean previousIsOnRequest, boolean thisIsOnRequest, boolean nextIsOnRequest) {
+		public VehiclePlatformRouteInfo(@Nullable Platform previousPlatform, @Nullable Platform thisPlatform, @Nullable Platform nextPlatform, @Nullable Route previousRoute, @Nullable Route thisRoute, @Nullable Route nextRoute, int platformIndexInRoute) {
 			this.previousPlatform = previousPlatform;
 			this.thisPlatform = thisPlatform;
 			this.nextPlatform = nextPlatform;
@@ -549,9 +550,6 @@ public class VehicleExtraData extends VehicleExtraDataSchema {
 			this.thisRoute = thisRoute;
 			this.nextRoute = nextRoute;
 			this.platformIndexInRoute = platformIndexInRoute;
-			this.previousIsOnRequest = previousIsOnRequest;
-			this.thisIsOnRequest = thisIsOnRequest;
-			this.nextIsOnRequest = nextIsOnRequest;
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package org.mtr.core.map;
 
-import it.unimi.dsi.fastutil.objects.ObjectArraySet;
+import org.mtr.libraries.it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import org.mtr.core.Main;
 import org.mtr.core.data.AreaBase;
 import org.mtr.core.data.SavedRailBase;
