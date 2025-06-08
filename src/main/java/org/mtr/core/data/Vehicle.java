@@ -385,6 +385,10 @@ public class Vehicle extends VehicleSchema implements Utilities {
 					vehicleExtraData.closeDoors();
 				}
 			} else {
+				if (vehicleExtraData.immutablePath.get(currentIndex).getDwellTime() > 0 && vehicleExtraData.immutablePath.get(currentIndex).getIsOnRequest()) {
+					// Skip this platform (not requested)
+					setNextStoppingIndex();
+				}
 				final double pathStoppingPoint = getPathStoppingPoint();
 				if (stoppingCooldown > 0) {
 					stoppingPoint = Math.min(vehicleExtraData.getStoppingPoint(), pathStoppingPoint);

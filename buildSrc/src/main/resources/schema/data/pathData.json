@@ -41,6 +41,9 @@
 		},
 		"speedLimit": {
 			"type": "integer"
+		},
+		"isOnRequest": {
+			"type": "boolean"
 		}
 	},
 	"required": [

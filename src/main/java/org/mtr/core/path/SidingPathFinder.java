@@ -106,11 +106,11 @@ public final class SidingPathFinder<T extends AreaBase<T, U>, U extends SavedRai
 					}
 				} else {
 					if (i == connectionDetailsList.size() - 1) {
-						path.add(new PathData(rail, endSavedRail.getId(), endSavedRail instanceof Platform ? ((Platform) endSavedRail).getDwellTime() : 1, stopIndex + 1, position1, position2));
+						path.add(new PathData(rail, endSavedRail.getId(), endSavedRail instanceof Platform ? ((Platform) endSavedRail).getDwellTime() : 1, endSavedRail instanceof Platform ? ((Platform) endSavedRail).getIsOnRequest() : false, stopIndex + 1, position1, position2));
 					} else if (rail.canTurnBack() && connectionDetailsList.get(i + 1).node.position.equals(position1)) {
-						path.add(new PathData(rail, 0, 1, stopIndex, position1, position2));
+						path.add(new PathData(rail, 0, 1, false, stopIndex, position1, position2));
 					} else {
-						path.add(new PathData(rail, 0, 0, stopIndex, position1, position2));
+						path.add(new PathData(rail, 0, 0, false, stopIndex, position1, position2));
 					}
 				}
 			}
@@ -214,7 +214,7 @@ public final class SidingPathFinder<T extends AreaBase<T, U>, U extends SavedRai
 				position1, angle1, position2, angle2,
 				Rail.Shape.QUADRATIC, 0, new ObjectArrayList<>(), AIRPLANE_SPEED, 0,
 				false, false, true, false, false, TransportMode.AIRPLANE
-		), 0, 0, stopIndex, position1, position2);
+		), 0, 0, false, stopIndex, position1, position2);
 	}
 
 	protected static class PositionAndAngle {

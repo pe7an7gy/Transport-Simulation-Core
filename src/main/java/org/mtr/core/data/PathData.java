@@ -20,20 +20,21 @@ public class PathData extends PathDataSchema implements ConditionalList {
 	private Rail rail;
 	public final boolean reversePositions;
 
-	public PathData(Rail rail, long savedRailBaseId, long dwellTime, int stopIndex, Position startPosition, Position endPosition) {
-		this(rail, savedRailBaseId, dwellTime, stopIndex, 0, 0, startPosition, rail.getStartAngle(startPosition), endPosition, rail.getStartAngle(endPosition));
+	public PathData(Rail rail, long savedRailBaseId, long dwellTime, boolean isOnRequest, int stopIndex, Position startPosition, Position endPosition) {
+		this(rail, savedRailBaseId, dwellTime, isOnRequest, stopIndex, 0, 0, startPosition, rail.getStartAngle(startPosition), endPosition, rail.getStartAngle(endPosition));
 	}
 
 	public PathData(PathData oldPathData, double startDistance, double endDistance) {
-		this(oldPathData.rail, oldPathData.savedRailBaseId, oldPathData.dwellTime, oldPathData.stopIndex, startDistance, endDistance, oldPathData.startPosition, oldPathData.startAngle, oldPathData.endPosition, oldPathData.endAngle);
+		this(oldPathData.rail, oldPathData.savedRailBaseId, oldPathData.dwellTime, oldPathData.isOnRequest, oldPathData.stopIndex, startDistance, endDistance, oldPathData.startPosition, oldPathData.startAngle, oldPathData.endPosition, oldPathData.endAngle);
 		shape = oldPathData.shape;
 		verticalRadius = oldPathData.verticalRadius;
 		speedLimit = oldPathData.speedLimit;
 	}
 
-	public PathData(@Nullable Rail rail, long savedRailBaseId, long dwellTime, long stopIndex, double startDistance, double endDistance, Position startPosition, Angle startAngle, Position endPosition, Angle endAngle) {
+	public PathData(@Nullable Rail rail, long savedRailBaseId, long dwellTime, boolean isOnRequest, long stopIndex, double startDistance, double endDistance, Position startPosition, Angle startAngle, Position endPosition, Angle endAngle) {
 		super(savedRailBaseId, dwellTime, stopIndex, startDistance, endDistance, startPosition, startAngle, endPosition, endAngle);
 		this.rail = rail;
+		this.isOnRequest = isOnRequest;
 		reversePositions = startPosition.compareTo(endPosition) > 0;
 		if (rail != null) {
 			shape = rail.railMath.getShape();
@@ -74,6 +75,10 @@ public class PathData extends PathDataSchema implements ConditionalList {
 
 	public final int getStopIndex() {
 		return (int) stopIndex;
+	}
+
+	public final boolean getIsOnRequest() {
+		return isOnRequest;
 	}
 
 	public boolean isSameRail(PathData pathData) {
