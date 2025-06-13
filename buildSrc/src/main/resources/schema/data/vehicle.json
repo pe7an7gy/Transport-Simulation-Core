@@ -36,6 +36,9 @@
 		"sidingDepartureTime": {
 			"type": "integer",
 			"default": -1
+		},
+		"isStopRequested": {
+			"type": "boolean"
 		}
 	}
 }

@@ -370,12 +370,20 @@ public final class Siding extends SidingSchema implements Utilities {
 	}
 
 	public void updateVehicleRidingEntities(long vehicleId, ObjectArrayList<VehicleRidingEntity> vehicleRidingEntities) {
+		Vehicle vehicle = findVehicleById(vehicleId);
+		if (vehicle != null) {
+			vehicle.updateRidingEntities(vehicleRidingEntities);
+		}
+	}
+	
+	@Nullable
+	public Vehicle findVehicleById(long vehicleId){
 		for (final Vehicle vehicle : vehicles) {
 			if (vehicle.getId() == vehicleId) {
-				vehicle.updateRidingEntities(vehicleRidingEntities);
-				break;
+				return vehicle;
 			}
 		}
+		return null;
 	}
 
 	public void getArrivals(long currentMillis, Platform platform, long count, ObjectArrayList<ArrivalResponse> arrivalResponseList) {

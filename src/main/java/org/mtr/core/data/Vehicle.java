@@ -87,6 +87,10 @@ public class Vehicle extends VehicleSchema implements Utilities {
 		return reversed;
 	}
 
+	public void setIsRequestStop(boolean isRequestedStop) {
+		this.isRequestedStop = isRequestedStop;
+	}
+
 	public boolean closeToDepot() {
 		return !getIsOnRoute() || railProgress < vehicleExtraData.getTotalVehicleLength() + vehicleExtraData.getRailLength();
 	}
@@ -387,7 +391,7 @@ public class Vehicle extends VehicleSchema implements Utilities {
 			} else {
 				if (vehicleExtraData.immutablePath.get(currentIndex).getDwellTime() > 0 && vehicleExtraData.immutablePath.get(currentIndex).getIsOnRequest()) {
 					// Skip this platform (not requested)
-					setNextStoppingIndex();
+					setNextStoppingIndex(true);
 				}
 				final double pathStoppingPoint = getPathStoppingPoint();
 				if (stoppingCooldown > 0) {
@@ -500,11 +504,13 @@ public class Vehicle extends VehicleSchema implements Utilities {
 		}
 		return !atoOverride && manualCooldown > 0;
 	}
-
 	private void setNextStoppingIndex() {
+		setNextStoppingIndex(false);
+	}
+	private void setNextStoppingIndex(boolean skipCurrent) {
 		nextStoppingIndexAto = nextStoppingIndexManual = vehicleExtraData.immutablePath.size() - 1;
 		vehicleExtraData.setStoppingPoint(vehicleExtraData.getTotalDistance());
-		for (int i = Utilities.getIndexFromConditionalList(vehicleExtraData.immutablePath, railProgress); i < vehicleExtraData.immutablePath.size(); i++) {
+		for (int i = Utilities.getIndexFromConditionalList(vehicleExtraData.immutablePath, railProgress) + (skipCurrent ? 1 : 0); i < vehicleExtraData.immutablePath.size(); i++) {
 			final PathData pathData = vehicleExtraData.immutablePath.get(i);
 			if (pathData.getDwellTime() > 0) {
 				if (vehicleExtraData.getIsManualAllowed()) {
