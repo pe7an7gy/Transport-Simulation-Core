@@ -87,8 +87,8 @@ public class Vehicle extends VehicleSchema implements Utilities {
 		return reversed;
 	}
 
-	public void setIsRequestStop(boolean isRequestedStop) {
-		this.isRequestedStop = isRequestedStop;
+	public void setIsStopRequested(boolean isStopRequested) {
+		this.isStopRequested = isStopRequested;
 	}
 
 	public boolean closeToDepot() {
