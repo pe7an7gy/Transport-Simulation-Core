@@ -33,6 +33,7 @@ public final class OperationProcessor {
 	public static final String CLEAR_BY_DEPOT_NAME = "clear_by_depot_name";
 	public static final String INSTANT_DEPLOY_BY_DEPOT_IDS = "instant_deploy_by_depot_ids";
 	public static final String INSTANT_DEPLOY_BY_DEPOT_NAME = "instant_deploy_by_depot_name";
+	public static final String REQUEST_STOP = "request_stop";
 
 	// Server to client
 	public static final String VEHICLES_LIFTS = "vehicles_lifts";
@@ -88,6 +89,9 @@ public final class OperationProcessor {
 				return null;
 			case INSTANT_DEPLOY_BY_DEPOT_NAME:
 				new DepotOperationByName(jsonReader).instantDeploy(simulator);
+				return null;
+			case REQUEST_STOP:
+				new RequestStop(jsonReader).requestStop(simulator);
 				return null;
 			default:
 				return null;

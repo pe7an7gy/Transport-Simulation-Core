@@ -169,6 +169,7 @@ public class Vehicle extends VehicleSchema implements Utilities {
 			elapsedDwellTime = 0;
 			speed = Siding.ACCELERATION_DEFAULT;
 			atoOverride = false;
+			isStopRequested = false;
 			vehicleExtraData.setSpeedTarget(speed);
 			setNextStoppingIndex();
 
@@ -390,8 +391,10 @@ public class Vehicle extends VehicleSchema implements Utilities {
 				}
 			} else {
 				if (vehicleExtraData.immutablePath.get(currentIndex).getDwellTime() > 0 && vehicleExtraData.immutablePath.get(currentIndex).getIsOnRequest()) {
-					// Skip this platform (not requested)
-					setNextStoppingIndex(true);
+					if(!isStopRequested){
+						// Skip this platform (not requested)
+						setNextStoppingIndex(true);
+					}
 				}
 				final double pathStoppingPoint = getPathStoppingPoint();
 				if (stoppingCooldown > 0) {

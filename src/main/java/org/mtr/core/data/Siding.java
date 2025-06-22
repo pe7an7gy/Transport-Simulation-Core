@@ -378,7 +378,9 @@ public final class Siding extends SidingSchema implements Utilities {
 	
 	@Nullable
 	public Vehicle findVehicleById(long vehicleId){
+		Main.LOGGER.info("vehicleId: {}", vehicleId);
 		for (final Vehicle vehicle : vehicles) {
+			Main.LOGGER.info("ID of vehicle: {}", vehicle.getId());
 			if (vehicle.getId() == vehicleId) {
 				return vehicle;
 			}
